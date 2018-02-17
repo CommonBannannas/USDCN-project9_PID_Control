@@ -1,10 +1,5 @@
 #include "PID.h"
-
 using namespace std;
-
-/*
-* TODO: Complete the PID class.
-*/
 
 PID::PID() {}
 
@@ -42,5 +37,5 @@ double PID::TotalError() {
 }
 
 double PID::UpdateValues() {
-    return (-1*(Kp*p_error + Kd*d_error + Ki*i_error));
+    return (-(Kp*p_error + Kd*d_error + Ki*i_error));
 }
