@@ -20,14 +20,14 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
 }
 
 void PID::UpdateError(double cte) {
-	if (step == 0)
+	if (step != 0)
+    d_error = cte - p_error;
+	else if(step == 0)
 		d_error = 0;
-	else
-		d_error = cte - p_error;
 	p_error = cte;
-	i_error += cte;
+	i_error = i_error + cte;
 
-	total_error += cte*cte;
+	total_error = total_error + cte * cte;
 	step++;
 }
 
