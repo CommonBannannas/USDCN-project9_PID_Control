@@ -19,7 +19,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Run either `./install-mac.sh` or `./install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -33,7 +33,7 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./pid`. 
+4. Run it: `./pid`.
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
@@ -96,3 +96,31 @@ still be compilable with cmake and make./
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
+## Describe the effect each of the P, I, D components had in your implementation.
+
+P stands for proportional component, and it is the responsible of steering the car
+proportionally with respect to the lane center towards a desired path. However this
+component tends to overshoot and oscillate heavily because as it name self explains
+it is proportional to the 'CTE' the cross track error.
+
+D stands for differential, it is the derivative of the 'CTE', this acts as a dampener
+for the overshooting of the P component steering the car lightly to the other direction.
+
+I stands for integral component, it is the integral of all the history of the 'CTE',
+it acts as a bias and serves the purpose of stabilizing the car when it encounters a curve
+or when it starts to oscillate.
+
+I tuned the PID parameters by hand by a binary search, I started with the value of 0
+for each parameter and with the value of 2 for the search spectrum.
+I searched the web for the most common values for these parameters and started
+adding 0.25 and subtracting 0.25 and evaluated the controller's performance on the
+track. When I was satisfied with the result I stopped hand tuning.
+Using another tuning technique as twiddle or a combination of twiddle and hand tuning
+would have been the best way to approach the problem. However I had little time to
+implement a twiddle algorithm.
+
+An interesting addition and further implementation for this controller would be adding
+a PID controller for the throttle as suggested and using a more intelligent approach
+for finding the correct PID parameters.
+
+ 
