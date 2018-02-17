@@ -9,13 +9,16 @@ public:
   double p_error;
   double i_error;
   double d_error;
+  double total_error;
 
   /*
   * Coefficients
-  */ 
+  */
   double Kp;
   double Ki;
   double Kd;
+
+  int step;
 
   /*
   * Constructor
@@ -41,6 +44,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+  /*
+  * Update the PID steering angle controller values.
+  */
+
+  double UpdateValues();
 };
 
 #endif /* PID_H */
